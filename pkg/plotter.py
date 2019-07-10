@@ -43,7 +43,7 @@ if __name__=="__main__":
     # initialize our algorithm class with our given data
     k_means = K_means(data)
 
-    fig, axs = plt.subplots(nrows=1, ncols=len(n_clusters_lst), figsize=(16, 9))
+    fig, axs = plt.subplots(nrows=1, ncols=len(n_clusters_lst), figsize=(16, 9), dpi=200)
     for i_n_clusters, n_clusters in enumerate(n_clusters_lst):
         print("Clustering with", n_clusters, "distinct clusters ...")
         means, assignments, J = sklearn_k_means(data, n_clusters=n_clusters, init='random'
@@ -66,7 +66,7 @@ if __name__=="__main__":
     dbscan = DBSCAN(data)  # initialize our class with all the data in order to use it for plotting
     params_lst_full_data = [[0.3, 200], [0.1, 50], [0.2, 20]]  # array of [eps, minPts]
 
-    fig, axs = plt.subplots(nrows=1, ncols=len(params_lst_full_data), figsize=(16, 9))
+    fig, axs = plt.subplots(nrows=1, ncols=len(params_lst_full_data), figsize=(16, 9), dpi=200)
     for i_params, params in enumerate(params_lst_full_data):
         dbscan_model = sklearn_DBSCAN(eps=params[0], min_samples=params[1], metric='euclidean')  # initialize the model
         print("Clustering with eps =", params[0], "and minPts =", params[1], "...")
