@@ -38,7 +38,7 @@ class K_means:
         updated_assignments = np.zeros(self.__assignments.shape, dtype=np.int8)
         for i, x in enumerate(self.__data):
             # calculate squared distances of a point to each of the cluster centers
-            d_x_mu = np.array([np.sum((x - mu)**2) for mu in self.__means])
+            d_x_mu = np.array([np.sum((x - mu) ** 2) for mu in self.__means])
             k_min = np.argmin(d_x_mu)
             if type(k_min) is np.ndarray and len(k_min) > 1:
                 wrn.warning("A data point is closest to more than one cluster mean. Taking the first one."
@@ -89,8 +89,8 @@ class K_means:
 
             # store assignments and cluster means with lowest J
             if J < J_min:
-                self.assignments = self.__assignments
-                self.means = self.__means
+                self.assignments = np.copy(self.__assignments)
+                self.means = np.copy(self.__means)
                 J_min = J
 
     def plot_2d(self, ax):
