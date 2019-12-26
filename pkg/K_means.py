@@ -21,18 +21,19 @@ class K_means:
         return J
 
     def __expectation_step(self):
+        success = True
         for k in range(len(self.__means)):
-
             N_k = np.count_nonzero(self.__assignments[:, k])
 
             if N_k == 0:
                 wrn.warn("A cluster has become empty. The initial values of the cluster means are choosen poorely."
                          , RuntimeWarning)
-                return False
+                success = False
+                break
             else:
                 self.__means[k] = 1. / N_k * np.sum(
                     np.take(self.__data, np.nonzero(self.__assignments[:, k])[0], axis=0), axis=0)
-                return True  # success
+        return success
 
     def __maximization_step(self):
         updated_assignments = np.zeros(self.__assignments.shape, dtype=np.int8)
